@@ -26,16 +26,16 @@ if %errorlevel% neq 0 (
 echo.
 
 :: 2. Create bin folder and compile if needed
-if not exist "bin" (
+if not exist "SmartHostelManagement\bin" (
     echo [Frontend] Creating build output directory 'bin'...
-    mkdir bin
+    mkdir "SmartHostelManagement\bin"
 )
 
 echo [Frontend] Copying UI resource files (FXML/CSS)...
-xcopy /E /I /Y "src\resources" "bin\resources" >nul
+xcopy /E /I /Y "SmartHostelManagement\src\resources" "SmartHostelManagement\bin\resources" >nul
 
 echo [Frontend] Compiling source files...
-javac -d bin -cp "lib/*" "@sources.txt"
+javac -d "SmartHostelManagement\bin" -cp "SmartHostelManagement\lib/*" "@SmartHostelManagement\sources.txt"
 if %errorlevel% neq 0 (
     echo [ERROR] Compilation failed. Please check your JDK installation.
     pause
@@ -46,7 +46,7 @@ echo.
 
 :: 3. Launch the JavaFX Application
 echo [Frontend] Launching application...
-java -Djava.library.path=lib -cp "bin;lib/*" app.Main
+java -cp "SmartHostelManagement\bin;SmartHostelManagement\lib/*" app.Main
 if %errorlevel% neq 0 (
     echo.
     echo [INFO] Application exited with code %errorlevel%.
